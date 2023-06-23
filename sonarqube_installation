@@ -28,8 +28,12 @@ cd /opt/sonarqube-9.8.0.63668/bin/linux-x86-64/
 
 #login to sonarqube in browser
 publicip:9000
+default:
 u:admin
 p:admin
+
+new pwd: sonar
+
 
 
 
@@ -57,10 +61,29 @@ Click on generate
 
 Click on continue
 
+token: Analyze "travelbooking-ms": sqp_a9c348e7d16bfc52e72eb52e6137649d30bbfad6
+
+command for mvn:
+
+ mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=travelbooking-ms \
+  -Dsonar.host.url=http://15.206.205.12:9000 \
+  -Dsonar.login=sqp_a9c348e7d16bfc52e72eb52e6137649d30bbfad6
+
 
 Go to intelij Idea and create a file named sonar-project.properties
 Copy the first 2 lines  from 2nd step of above screenshot. Remove the \ and -D
 And then the below lines need to be pasted under the sonar.login property like the next screenshot.
+
+sh 'mvn clean verify sonar:sonar'
+sonar.projectKey=travelbooking-ms
+sonar.projectVersion=1.0
+sonar.sources=src/main/java
+sonar.sourceEncoding=UTF-8
+sonar.language=java
+sonar.java.binaries=target/classes
+
+
 sonar.projectVersion=1.0 sonar.sources=src/main/java sonar.sourceEncoding=UTF-8 sonar.language=java sonar.java.binaries=target/classes
 
 
@@ -72,6 +95,8 @@ Click on create user
 Click on create then click on the token(red rounded on the below screenshot) to generate token for Jenkins user
 
 You can click on generate token then you can see on token has been generated. Copy the token to a note pad for future purpose
+
+token>>>  squ_c4471379450586721930c8ccbe1933be781ab72b
 
 
 Go to the Jenkins and download the plugin SonarQube Scanner
